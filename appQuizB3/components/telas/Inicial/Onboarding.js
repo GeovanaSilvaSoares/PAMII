@@ -8,8 +8,8 @@ import Terceira from './Slides/Terceira';
 
 import Button from './Button';
 
-
 const { width } = Dimensions.get('window');
+
 
 const slides = [
   { id: '1', component: <Primeira /> },
@@ -31,36 +31,39 @@ export default function Onboarding() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.circulo}></View>
-      <View style={styles.retanguloArredondado}></View>
-      
-      <ScrollView
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        onScroll={handleScroll}
-        scrollEventThrottle={16}
-      >
-        {slides.map((slide) => (
-          <View key={slide.id} style={{ width, height: '100%' }}>
-            {slide.component}
-          </View>
-        ))}
-      </ScrollView>
+      <View style={styles.flex}>
+        <View style={styles.circulo}></View>
+        <View style={styles.retanguloArredondado}></View>
 
-      <View style={styles.indicators}>
-        {slides.map((_, index) => (
-          <View
-            key={index}
-            style={[
-              styles.indicator,
-              currentSlide === index && styles.activeIndicator,
-            ]}
-          />
-        ))}
+        <ScrollView style={styles.slides}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          onScroll={handleScroll}
+          scrollEventThrottle={16}
+        >
+
+          {slides.map((slide) => (
+            <View key={slide.id} style={{ width, height : "80%", marginTop: 50}}>
+              {slide.component}
+            </View>
+          ))}
+        </ScrollView>
+
+        <View style={styles.indicators}>
+          {slides.map((_, index) => (
+            <View
+              key={index}
+              style={[
+                styles.indicator,
+                currentSlide === index && styles.activeIndicator,
+              ]}
+            />
+          ))}
+        </View>
+
+        <Button />
       </View>
-
-      <Button />
 
     </View>
   );
@@ -69,13 +72,19 @@ export default function Onboarding() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: '#262626',
+  },
+  flex: {
+    width:"100%",
+    height:'100%',
   },
   indicators: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 80,
+    marginBottom: 40,
   },
   indicator: {
     width: 10,
@@ -102,7 +111,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
-  
+
   circulo: {
     width: 210,
     height: 210,
