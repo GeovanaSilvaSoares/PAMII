@@ -169,6 +169,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     marginTop: 20,
+    marginBottom: 20,
   },
   
   resultado: {
